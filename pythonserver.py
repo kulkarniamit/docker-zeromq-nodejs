@@ -1,7 +1,6 @@
 #
 #   Hello World server in Python
 #   Binds REP socket to tcp://*:5000
-#   Expects b"Hello" from client, replies with b"World"
 #
 
 import time
