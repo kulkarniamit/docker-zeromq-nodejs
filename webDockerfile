@@ -1,0 +1,14 @@
+FROM ubuntu:16.04
+RUN apt-get update && apt-get -y install nodejs npm \
+                                         libtool pkg-config build-essential \
+                                         autoconf automake uuid-dev wget
+RUN wget -q https://github.com/zeromq/libzmq/releases/download/v4.2.2/zeromq-4.2.2.tar.gz
+RUN tar -xzvf zeromq-4.2.2.tar.gz
+WORKDIR /zeromq-4.2.2
+RUN ./configure
+RUN make install & ldconfig
+
+WORKDIR /
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN npm install express zeromq uuid --save
+ADD appexample.js /appexample.js
